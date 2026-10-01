@@ -73,10 +73,17 @@
     if (!reduce) timer = setInterval(() => { if (!touched && !document.hidden) show((i + 1) % tabs.length); }, 6000);
   }
 
+  // phone: 2x2 grid of live mini previews
+  function minis() {
+    const boxes = $$('.mscreen'); if (!boxes.length) return;
+    const fit = () => boxes.forEach((m) => { const f = m.querySelector('iframe'); if (f) f.style.transform = 'scale(' + m.clientWidth / 1280 + ')'; });
+    fit(); if ('ResizeObserver' in window) { const ro = new ResizeObserver(fit); boxes.forEach((m) => ro.observe(m)); } else addEventListener('resize', fit);
+  }
+
   async function boot() {
     try { S = await (await fetch('/site.json', { cache: 'no-cache' })).json(); } catch (e) { return; }
     money = new Intl.NumberFormat('en-US', { style: 'currency', currency: S.currency.toUpperCase() });
-    fill(); form(); showcase();
+    fill(); form(); showcase(); minis();
     const want = new URLSearchParams(location.search).get('plan');
     setPlan(want || 'demo');
     $$('[data-pick]').forEach((a) => a.addEventListener('click', () => { if ($('#orderForm')) setPlan(a.dataset.pick); else a.href = '/?plan=' + a.dataset.pick + '#order'; }));

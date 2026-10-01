@@ -184,3 +184,38 @@ h1,h2,h3{letter-spacing:-.03em}
 #order .sub{margin-left:auto;margin-right:auto}
 #order .order-box{margin:0 auto;text-align:left}
 .careBox b span{color:inherit;font-size:inherit}
+
+/* ---------- phone polish ---------- */
+.minis{display:none}
+.tap{font-style:normal;display:none}
+@media (max-width:700px){
+  .top .wrap{height:56px}
+  .word{font-size:19px}
+  .hero{padding:28px 0 40px}
+  .hero .wrap{gap:28px}
+  .hero h1{font-size:clamp(36px,10.5vw,46px);margin-top:0}
+  .lead{font-size:16.5px;margin-top:14px}
+  .cta-row{margin-top:22px}
+  .cta-row .btn{flex:1 1 100%;height:52px;font-size:15px}
+  .assure{justify-content:center;gap:8px 14px;font-size:13px;margin-top:16px}
+  .assure svg{width:14px;height:14px}
+  /* swap the tabbed preview for a 2x2 grid of all four samples */
+  .tabs,.frame,#sampleOpen{display:none}
+  .minis{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .mini{display:grid;gap:7px;text-decoration:none;color:var(--text2);font-size:13px;font-weight:600;text-align:center}
+  .mscreen{position:relative;overflow:hidden;border-radius:12px;aspect-ratio:16/11;background:#fff;border:1px solid var(--line2);box-shadow:0 14px 30px -14px rgba(124,58,237,.7)}
+  .mscreen iframe{position:absolute;top:0;left:0;width:1280px;height:880px;border:0;transform-origin:0 0;pointer-events:none}
+  .show-foot{justify-content:center;text-align:center;font-size:12px}
+  .tap{display:inline}
+  .show::before{bottom:-10px;height:100px}
+  .section{padding:52px 0}
+  .section h2{font-size:clamp(28px,8.4vw,38px)}
+  .section .sub{font-size:15.5px;margin-bottom:26px}
+  .opt{padding:24px 18px;gap:16px}
+  .opt h3{font-size:22px}
+  .opt .price b{font-size:46px}
+  .order-box{padding:16px;border-radius:22px}
+  .close-card{padding:30px 18px}
+  .eyebrow{font-size:11px;padding:6px 11px}
+  .tile{padding:18px}
+}
