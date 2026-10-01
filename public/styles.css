@@ -171,3 +171,11 @@ section[id]{scroll-margin-top:72px}
 body{font-variant-numeric:lining-nums}
 .opt .plus{margin:-8px 0 0;font-size:14px;color:var(--text2)}.opt .plus b{color:var(--text)}
 h1,h2,h3{letter-spacing:-.03em}
+
+/* symmetric option cards: every row lines up across both cards */
+.opt .note{margin-top:0}
+@media (min-width:900px){
+  .opts{grid-template-rows:repeat(11,auto);row-gap:0}
+  .opt{display:grid;grid-row:span 11;grid-template-rows:subgrid;row-gap:18px;align-content:start}
+  .opt > .btn{align-self:end}
+}
