@@ -25,10 +25,10 @@
     "Other"
   ],
   "care": {
-    "name": "Care plan",
+    "name": "Hosting & care plan",
     "priceCents": 3000,
     "interval": "month",
-    "receiptNote": "Your Veryeo care plan: custom domain, hosting, small monthly updates and ongoing support. Renews monthly until you cancel.",
+    "receiptNote": "Hosting & care for your Veryeo website: custom domain, hosting, small monthly updates and support. Renews monthly until you cancel.",
     "points": [
       "Custom domain included",
       "Hosting that keeps you online",

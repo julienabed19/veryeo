@@ -24,8 +24,8 @@ module.exports = async (req, res) => {
     if (!brief.business) return res.status(400).json({ error: 'Please enter your business or project name.' });
     if (brief.details.length < 10) return res.status(400).json({ error: 'Please tell us a little about the site you want.' });
 
-    const care = planId === 'website' && body.care === true;
-    brief.care_plan = care ? 'yes' : '';
+    const care = planId === 'website'; // hosting & care is part of every full website
+    if (care && body.agree !== true) return res.status(400).json({ error: 'Please check the box to agree to the $30/month hosting & care plan.' });
     const url = origin(req);
     // Saved on the Stripe payment so every order's details show in your dashboard.
     const metadata = { site: 'veryeo', plan: planId, ...Object.fromEntries(Object.entries(brief).filter(([, v]) => v)) };

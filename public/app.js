@@ -18,12 +18,12 @@
     plan = id === 'website' ? 'website' : 'demo';
     $$('[data-plan-btn]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.planBtn === plan)));
     if ($('#totalLabel')) {
-      const care = plan === 'website' && $('#f-care') && $('#f-care').checked;
+      const care = plan === 'website';
       $('#totalLabel').textContent = plan === 'demo' ? 'Demo total' : care ? 'Due today, then ' + money.format(S.care.priceCents / 100).replace(/\.00$/, '') + '/month' : 'Website total';
       $('#totalPrice').textContent = money.format((S.plans[plan].priceCents + (care ? S.care.priceCents : 0)) / 100);
       $('#demoField').hidden = plan !== 'website';
       $('#careField').hidden = plan !== 'website';
-      $('#careTerms').hidden = !care;
+      $('#demoCodeNote').hidden = plan !== 'website';
     }
   }
 
@@ -32,20 +32,21 @@
     const sel = $('#f-type'); sel.innerHTML = '';
     S.siteTypes.forEach((t) => { const o = document.createElement('option'); o.textContent = t; sel.appendChild(o); });
     // keep a draft in this browser so nothing is lost if they leave and come back
-    try { const d = JSON.parse(localStorage.getItem(DRAFT) || '{}'); for (const k in d) if (f.elements[k] && k !== 'care') f.elements[k].value = d[k]; } catch (e) {}
+    try { const d = JSON.parse(localStorage.getItem(DRAFT) || '{}'); for (const k in d) if (f.elements[k] && k !== 'agree') f.elements[k].value = d[k]; } catch (e) {}
     f.addEventListener('input', () => { try { localStorage.setItem(DRAFT, JSON.stringify(Object.fromEntries(new FormData(f)))); } catch (e) {} });
     $$('[data-plan-btn]').forEach((b) => (b.onclick = () => setPlan(b.dataset.planBtn)));
-    if ($('#f-care')) $('#f-care').onchange = () => setPlan(plan);
+    if ($('#f-agree')) $('#f-agree').onchange = () => { if ($('#f-agree').checked) $('#msg').textContent = ''; };
     f.onsubmit = async (e) => {
       e.preventDefault();
       const msg = $('#msg'), btn = $('#payBtn'); msg.textContent = '';
-      const brief = Object.fromEntries(new FormData(f)); delete brief.care;
-      const care = plan === 'website' && $('#f-care').checked;
+      const brief = Object.fromEntries(new FormData(f)); delete brief.agree;
+      const agree = plan === 'website' && $('#f-agree').checked;
+      if (plan === 'website' && !agree) { msg.textContent = 'Please check the box to agree to the $30/month hosting & care plan.'; $('#careField').scrollIntoView({ block: 'center' }); return; }
       if (!brief.business.trim()) { msg.textContent = 'Please enter your business or project name.'; f.elements.business.focus(); return; }
       if (brief.details.trim().length < 10) { msg.textContent = 'Please tell us a little about the site you want.'; f.elements.details.focus(); return; }
       const label = btn.innerHTML; btn.disabled = true; btn.textContent = 'Loading…';
       try {
-        const r = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ plan, care, brief }) });
+        const r = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ plan, agree, brief }) });
         const d = await r.json().catch(() => ({}));
         if (!r.ok || !d.url) throw new Error(d.error || 'Checkout could not start. Please try again.');
         location.href = d.url;

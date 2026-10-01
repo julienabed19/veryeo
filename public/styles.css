@@ -183,3 +183,4 @@ h1,h2,h3{letter-spacing:-.03em}
 #order .wrap{text-align:center}
 #order .sub{margin-left:auto;margin-right:auto}
 #order .order-box{margin:0 auto;text-align:left}
+.careBox b span{color:inherit;font-size:inherit}
