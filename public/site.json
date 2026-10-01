@@ -3,33 +3,17 @@
   "brand": "Veryeo",
   "contactEmail": "support.website.issue@gmail.com",
   "currency": "usd",
-  "turnaround": "within 3 business days",
-  "demoCode": "DEMO9",
   "plans": {
     "demo": {
       "name": "Website demo",
       "priceCents": 900,
-      "tagline": "See your site before you commit",
-      "points": [
-        "A custom homepage design made for your business",
-        "Shared as a private preview link",
-        "Delivered within 3 business days",
-        "$9 credited toward your full website"
-      ]
+      "receiptNote": "Thanks for ordering a Veryeo demo! I'll reach out by email as soon as possible with your private homepage preview."
     },
     "website": {
       "name": "Full website",
       "priceCents": 29900,
-      "tagline": "Your complete site, built and launched",
-      "points": [
-        "Custom design for your brand, up to 5 pages",
-        "Looks great on phones and computers",
-        "2 rounds of revisions included",
-        "Basic SEO setup: page titles, descriptions, sitemap",
-        "Launched on a free web address or a domain you own",
-        "Delivered within 3 business days after we have your content"
-      ]
+      "receiptNote": "Thanks for ordering your Veryeo website! I'll reach out by email as soon as possible to collect your content and get started."
     }
   },
-  "siteTypes": ["Business website", "Online store", "Portfolio / personal", "Landing page", "Restaurant / local service", "Other"]
+  "siteTypes": ["Online store", "Barber / salon booking", "Restaurant / cafe", "Fitness / coaching", "Local service business", "Portfolio / personal", "Other"]
 }

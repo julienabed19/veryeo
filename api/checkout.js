@@ -34,7 +34,7 @@ module.exports = async (req, res) => {
         price_data: {
           currency: site.currency,
           unit_amount: plan.priceCents,
-          product_data: { name: `${site.brand} ${plan.name}`, description: plan.tagline, metadata: { plan: planId } },
+          product_data: { name: `${site.brand} ${plan.name}`, description: plan.receiptNote, metadata: { plan: planId } },
         },
       }],
       customer_creation: 'always',
@@ -42,9 +42,7 @@ module.exports = async (req, res) => {
       billing_address_collection: 'auto',
       metadata,
       payment_intent_data: { description: `${site.brand} ${plan.name}: ${brief.business}`, metadata },
-      custom_text: { submit: { message: planId === 'demo'
-        ? `We'll email your demo ${site.turnaround}.`
-        : "We'll email you to start your website. Bought a demo? Enter the code from your demo email above." } },
+      custom_text: { submit: { message: plan.receiptNote + (planId === 'website' ? ' Bought a demo? Enter the code from your demo email above.' : '') } },
       success_url: url + '/success.html?session_id={CHECKOUT_SESSION_ID}',
       cancel_url: url + '/?checkout=cancelled#order',
     };

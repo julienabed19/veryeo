@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ember &amp; Oak · Sample restaurant site by Veryeo</title><meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}body{font-family:Inter,system-ui,sans-serif;background:#1b1410;color:#f3e9dc}
+a{color:inherit;text-decoration:none}.w{max-width:1200px;margin:0 auto;padding:0 32px}
+nav{display:flex;justify-content:space-between;align-items:center;height:78px}
+.brand{font-family:"Playfair Display",serif;font-size:28px;font-weight:600}.brand i{color:#e07a3f}
+.links{display:flex;gap:30px;font-size:14px;color:#bfae99}.res{border:1px solid #e07a3f;color:#f3e9dc;padding:10px 18px;border-radius:999px;font-size:14px}
+.hero{position:relative;border-radius:28px;overflow:hidden;min-height:440px;padding:56px;display:flex;flex-direction:column;justify-content:flex-end;
+background:radial-gradient(500px 300px at 78% 62%,rgba(255,140,50,.55),transparent 70%),radial-gradient(300px 200px at 72% 75%,rgba(255,200,90,.6),transparent 70%),linear-gradient(160deg,#3b2618,#140d09)}
+.hero::before{content:"";position:absolute;right:70px;bottom:40px;width:380px;height:190px;border-radius:190px 190px 0 0;border:14px solid #4a3324;border-bottom:0;background:radial-gradient(circle at 50% 100%,#ffcf6b 0,#ff7a2f 30%,#7a2e0f 60%,#1b100a 80%)}
+.hero::after{content:"";position:absolute;right:120px;bottom:40px;width:280px;height:14px;background:#2a1a10;border-radius:4px}
+.hero h1{position:relative;font-family:"Playfair Display",serif;font-weight:500;font-size:72px;line-height:1;max-width:11ch}.hero h1 em{color:#f0a868}
+.hero p{position:relative;color:#d8c6b0;font-size:18px;margin-top:16px;max-width:36ch}
+.resbar{position:relative;margin-top:28px;display:flex;gap:10px;background:rgba(27,20,16,.75);backdrop-filter:blur(6px);border:1px solid #4a3324;border-radius:16px;padding:10px;width:max-content}
+.resbar span{padding:12px 18px;border-radius:10px;background:#2a1f18;font-size:14px;color:#d8c6b0}.resbar b{padding:12px 20px;border-radius:10px;background:#e07a3f;color:#1b1410}
+.menu{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:44px 0 60px}
+.dish{border-top:1px solid #4a3324;padding-top:18px}.dish h3{font-family:"Playfair Display",serif;font-weight:500;font-size:24px;display:flex;justify-content:space-between}
+.dish h3 span{color:#f0a868;font-family:Inter,sans-serif;font-size:16px}.dish p{color:#bfae99;font-size:14px;margin-top:8px;line-height:1.5}
+@media(max-width:800px){.hero{padding:28px}.hero h1{font-size:44px}.hero::before{width:220px;height:110px;right:20px}.menu{grid-template-columns:1fr}.links{display:none}.resbar{flex-wrap:wrap;width:auto}}
+</style></head><body><div class="w">
+<nav><a class="brand" href="#">Ember <i>&amp;</i> Oak</a><div class="links"><a href="#">Menu</a><a href="#">Private events</a><a href="#">Gift cards</a><a href="#">Visit</a></div><a class="res" href="#">Reserve a table</a></nav>
+<section class="hero"><h1>Wood-fired, <em>slow-cooked</em>, shared.</h1><p>Seasonal plates from our open hearth. Dinner nightly, brunch on weekends.</p>
+<div class="resbar"><span>Fri, Oct 10</span><span>7:30 PM</span><span>2 guests</span><b>Find a table</b></div></section>
+<section class="menu"><div class="dish"><h3>Hearth flatbread<span>$16</span></h3><p>Charred dough, whipped ricotta, hot honey, basil.</p></div>
+<div class="dish"><h3>Oak-smoked short rib<span>$34</span></h3><p>Twelve-hour braise, crispy shallots, root vegetable mash.</p></div>
+<div class="dish"><h3>Ember-roasted carrots<span>$14</span></h3><p>Brown butter, pistachio dukkah, labneh.</p></div></section></div></body></html>

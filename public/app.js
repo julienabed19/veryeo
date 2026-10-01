@@ -8,16 +8,8 @@
   function fill() {
     const fmt = (c) => money.format(c / 100).replace(/\.00$/, '');
     $$('[data-price]').forEach((n) => { const p = S.plans[n.dataset.price]; if (p) n.textContent = fmt(p.priceCents); });
-    $$('[data-turnaround]').forEach((n) => (n.textContent = S.turnaround));
     $$('[data-email]').forEach((n) => { n.textContent = S.contactEmail; n.href = 'mailto:' + S.contactEmail; });
     $$('[data-year]').forEach((n) => (n.textContent = new Date().getFullYear()));
-    $$('[data-plan]').forEach((card) => {
-      const p = S.plans[card.dataset.plan]; if (!p) return;
-      $('[data-name]', card).textContent = p.name;
-      $('[data-tagline]', card).textContent = p.tagline;
-      const ul = $('[data-points]', card); ul.innerHTML = '';
-      p.points.forEach((t) => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
-    });
   }
 
   function setPlan(id) {
@@ -54,10 +46,29 @@
     };
   }
 
+  // hero showcase: 4 sample homepages shown as scaled live pages
+  function showcase() {
+    const screen = $('#screen'), frame = $('#sampleFrame'); if (!screen || !frame) return;
+    const tabs = $$('[data-sample]');
+    const fit = () => { frame.style.transform = 'scale(' + screen.clientWidth / 1280 + ')'; };
+    fit(); if ('ResizeObserver' in window) new ResizeObserver(fit).observe(screen); else addEventListener('resize', fit);
+    let i = 0, timer = null, touched = false;
+    const show = (n) => {
+      i = n; const t = tabs[n];
+      tabs.forEach((b) => b.setAttribute('aria-selected', String(b === t)));
+      frame.src = '/samples/' + t.dataset.sample + '.html';
+      $('#sampleUrl').textContent = t.dataset.url;
+      $('#sampleOpen').href = '/samples/' + t.dataset.sample + '.html';
+    };
+    tabs.forEach((b, n) => (b.onclick = () => { touched = true; clearInterval(timer); show(n); }));
+    const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce) timer = setInterval(() => { if (!touched && !document.hidden) show((i + 1) % tabs.length); }, 6000);
+  }
+
   async function boot() {
     try { S = await (await fetch('/site.json', { cache: 'no-cache' })).json(); } catch (e) { return; }
     money = new Intl.NumberFormat('en-US', { style: 'currency', currency: S.currency.toUpperCase() });
-    fill(); form();
+    fill(); form(); showcase();
     const want = new URLSearchParams(location.search).get('plan');
     setPlan(want || 'demo');
     $$('[data-pick]').forEach((a) => a.addEventListener('click', () => { if ($('#orderForm')) setPlan(a.dataset.pick); else a.href = '/?plan=' + a.dataset.pick + '#order'; }));

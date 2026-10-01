@@ -13,20 +13,16 @@
 <meta property="og:description" content="Your Veryeo order confirmation.">
 <meta property="og:image" content="/images/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#f5f3ee">
+<meta name="theme-color" content="#0b0b0f">
 <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<div class="announce">Try a <b data-price="demo">$9</b> website demo first. It's credited toward your full site.</div>
 <header class="top"><div class="wrap">
-  <a class="logo" href="/"><i></i>veryeo</a>
-  <nav class="nav" aria-label="Main">
-    <a href="/#how">How it works</a><a href="/#pricing">Pricing</a><a href="/#work">Work</a><a href="/#faq">FAQ</a>
-    <a class="btn primary sm" href="/#order" data-pick="demo">Get a demo</a>
-  </nav>
+  <a class="word" href="/">Veryeo</a>
+  <a class="btn primary sm" href="/?plan=demo#order" data-pick="demo">Get a demo &middot;&nbsp;<span data-price="demo">$9</span></a>
 </div></header>
 <main>
 <section class="page"><div class="wrap">
@@ -36,8 +32,12 @@
 </div></section>
 </main>
 <footer class="foot"><div class="wrap">
-  <div>&copy; <span data-year></span> Veryeo</div>
-  <nav aria-label="Footer"><a href="/refunds.html">Refund policy</a><a href="/privacy.html">Privacy policy</a><a href="/terms.html">Terms of service</a><a href="/#contact">Contact</a></nav>
+  <div class="cols">
+    <div><span class="word">Veryeo</span><p style="margin:8px 0 0;max-width:30ch">Custom websites for small businesses. Try a demo first.</p></div>
+    <div><h5>Start</h5><nav><a href="/?plan=demo#order" data-pick="demo">Get a demo</a><a href="/#options">Demo vs full website</a><a href="/?plan=website#order" data-pick="website">Buy a website</a><a href="/#samples">Sample designs</a></nav></div>
+    <div><h5>Company</h5><nav><a href="/#contact">Contact</a><a href="/refunds.html">Refund policy</a><a href="/terms.html">Terms of service</a><a href="/privacy.html">Privacy policy</a></nav></div>
+  </div>
+  <div>&copy; <span data-year></span> Veryeo. All rights reserved.</div>
 </div></footer>
 <script src="/app.js"></script>
 <script>
@@ -60,10 +60,9 @@
     box.appendChild(card);
     const h=add('h2',null,'What happens next');box.appendChild(h);
     const ol=add('ol','next');
-    const turn=(window.Site&&Site.get()&&Site.get().turnaround)||'within 3 business days';
     const steps=o.plan==='website'
-      ?['We email you'+(o.email?' at '+o.email:'')+' to collect your text, logo and photos.','We build your site and deliver it '+turn+' after we have your content.','You review it, request up to 2 rounds of changes, and we launch it.']
-      :['We start designing your homepage from the details you sent.','We email your private preview link'+(o.email?' to '+o.email:'')+' '+turn+'.','Love it? Buy the full website with the code in that email for your demo credit.'];
+      ?['Check your inbox'+(o.email?' ('+o.email+')':'')+' for your email receipt.','We reach out as soon as possible to collect your logo, photos and text.','You review your site, request up to 2 rounds of changes, and we launch it.']
+      :['Check your inbox'+(o.email?' ('+o.email+')':'')+' for your email receipt.','We start designing your homepage from the details you sent and email your private preview link as soon as possible.','Love it? Buy the full website and use the code in that email for your $9 credit.'];
     steps.forEach(s=>ol.appendChild(add('li',null,s)));box.appendChild(ol);
   }catch(e){t.textContent='We could not load your order';box.appendChild(add('p',null,'Your payment may still have gone through. Check your email for a receipt or contact us.'))}
 })();
