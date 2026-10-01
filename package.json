@@ -1,0 +1,6 @@
+{
+  "name": "veryeo",
+  "private": true,
+  "description": "Veryeo: website demos and custom websites, paid with Stripe Checkout, hosted on Vercel.",
+  "engines": { "node": ">=18" }
+}
