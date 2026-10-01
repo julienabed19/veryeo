@@ -24,28 +24,47 @@ module.exports = async (req, res) => {
     if (!brief.business) return res.status(400).json({ error: 'Please enter your business or project name.' });
     if (brief.details.length < 10) return res.status(400).json({ error: 'Please tell us a little about the site you want.' });
 
+    const care = planId === 'website' && body.care === true;
+    brief.care_plan = care ? 'yes' : '';
     const url = origin(req);
     // Saved on the Stripe payment so every order's details show in your dashboard.
     const metadata = { site: 'veryeo', plan: planId, ...Object.fromEntries(Object.entries(brief).filter(([, v]) => v)) };
+    const buildItem = {
+      quantity: 1,
+      price_data: {
+        currency: site.currency,
+        unit_amount: plan.priceCents,
+        product_data: { name: `${site.brand} ${plan.name}`, description: plan.receiptNote, metadata: { plan: planId } },
+      },
+    };
     const params = {
-      mode: 'payment',
-      line_items: [{
-        quantity: 1,
-        price_data: {
-          currency: site.currency,
-          unit_amount: plan.priceCents,
-          product_data: { name: `${site.brand} ${plan.name}`, description: plan.receiptNote, metadata: { plan: planId } },
-        },
-      }],
-      customer_creation: 'always',
+      mode: care ? 'subscription' : 'payment',
+      line_items: [buildItem],
       phone_number_collection: { enabled: true },
       billing_address_collection: 'auto',
       metadata,
-      payment_intent_data: { description: `${site.brand} ${plan.name}: ${brief.business}`, metadata },
       custom_text: { submit: { message: plan.receiptNote + (planId === 'website' ? ' Bought a demo? Enter the code from your demo email above.' : '') } },
       success_url: url + '/success.html?session_id={CHECKOUT_SESSION_ID}',
       cancel_url: url + '/?checkout=cancelled#order',
     };
+    if (care) {
+      // $299 build charged today + care plan billed monthly starting today, until cancelled.
+      params.line_items.push({
+        quantity: 1,
+        price_data: {
+          currency: site.currency,
+          unit_amount: site.care.priceCents,
+          recurring: { interval: site.care.interval },
+          product_data: { name: `${site.brand} ${site.care.name}`, description: site.care.receiptNote, metadata: { plan: 'care' } },
+        },
+      });
+      params.subscription_data = { description: `${site.brand} care plan: ${brief.business}`, metadata };
+      // Clear auto-renewal disclosure right above the pay button.
+      params.custom_text.submit = { message: `Care plan: $${(site.care.priceCents / 100).toFixed(0)} is charged today and then every month until you cancel. Cancel anytime by emailing ${site.contactEmail}. By paying you agree to our Terms of service at ${url}/terms.html.` };
+    } else {
+      params.customer_creation = 'always';
+      params.payment_intent_data = { description: `${site.brand} ${plan.name}: ${brief.business}`, metadata };
+    }
     if (planId === 'website') params.allow_promotion_codes = true;
     const session = await stripe('POST', '/checkout/sessions', params);
     return res.status(200).json({ url: session.url });

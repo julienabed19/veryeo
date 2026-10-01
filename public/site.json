@@ -15,5 +15,26 @@
       "receiptNote": "Thanks for ordering your Veryeo website! I'll reach out by email as soon as possible to collect your content and get started."
     }
   },
-  "siteTypes": ["Online store", "Barber / salon booking", "Restaurant / cafe", "Fitness / coaching", "Local service business", "Portfolio / personal", "Other"]
+  "siteTypes": [
+    "Online store",
+    "Barber / salon booking",
+    "Restaurant / cafe",
+    "Fitness / coaching",
+    "Local service business",
+    "Portfolio / personal",
+    "Other"
+  ],
+  "care": {
+    "name": "Care plan",
+    "priceCents": 3000,
+    "interval": "month",
+    "receiptNote": "Your Veryeo care plan: custom domain, hosting, small monthly updates and ongoing support. Renews monthly until you cancel.",
+    "points": [
+      "A custom domain included, like yourbusiness.com",
+      "Hosting that keeps your site online",
+      "Small updates each month, like new prices, hours or photos",
+      "Ongoing support: questions, fixes and a hand whenever your site needs it"
+    ]
+  },
+  "manageLink": ""
 }

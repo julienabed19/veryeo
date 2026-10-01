@@ -9,10 +9,11 @@ module.exports = async (req, res) => {
     res.setHeader('Cache-Control', 'no-store');
     return res.status(200).json({
       paid: s.payment_status === 'paid',
-      orderNumber: (s.payment_intent || s.id).toString().slice(-8).toUpperCase(),
+      orderNumber: (s.payment_intent || s.invoice || s.id).toString().slice(-8).toUpperCase(),
       email: s.customer_details && s.customer_details.email,
       name: s.customer_details && s.customer_details.name,
       plan: s.metadata && s.metadata.plan,
+      care: s.mode === 'subscription',
       business: s.metadata && s.metadata.business,
       currency: s.currency,
       discount: (s.total_details && s.total_details.amount_discount) || 0,
