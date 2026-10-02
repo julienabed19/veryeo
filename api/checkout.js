@@ -65,7 +65,7 @@ module.exports = async (req, res) => {
       params.customer_creation = 'always';
       params.payment_intent_data = { description: `${site.brand} ${plan.name}: ${brief.business}`, metadata };
     }
-    if (planId === 'website') params.allow_promotion_codes = true;
+    params.allow_promotion_codes = true; params.allow_promotion_codes = true;
     const session = await stripe('POST', '/checkout/sessions', params);
     return res.status(200).json({ url: session.url });
   } catch (e) {
