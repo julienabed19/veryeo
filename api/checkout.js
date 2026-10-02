@@ -1,4 +1,4 @@
-// POST /api/checkout  body: { plan: "demo"|"website", brief: {...} }
+// POST /api/checkout body: { plan: "demo"|"website", brief: {...} }
 // Prices always come from site.json on the server, never from the browser.
 const site = require('../public/site.json');
 const { stripe, origin } = require('../lib/stripe');
@@ -15,6 +15,7 @@ module.exports = async (req, res) => {
     const b = body.brief || {};
     const brief = {
       business: clip(b.business, 120),
+      phone: clip(b.phone, 30),
       type: site.siteTypes.includes(b.type) ? b.type : 'Other',
       details: clip(b.details, 480),
       link: clip(b.link, 300),
@@ -22,6 +23,7 @@ module.exports = async (req, res) => {
       demo_order: clip(b.demoOrder, 40),
     };
     if (!brief.business) return res.status(400).json({ error: 'Please enter your business or project name.' });
+    if (brief.phone.replace(/\D/g, '').length < 10) return res.status(400).json({ error: 'Please enter a phone number we can reach you at.' });
     if (brief.details.length < 10) return res.status(400).json({ error: 'Please tell us a little about the site you want.' });
 
     const care = planId === 'website'; // hosting & care is part of every full website

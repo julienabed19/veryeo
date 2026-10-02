@@ -43,6 +43,7 @@
       const agree = plan === 'website' && $('#f-agree').checked;
       if (plan === 'website' && !agree) { msg.textContent = 'Please check the box to agree to the $30/month hosting & care plan.'; $('#careField').scrollIntoView({ block: 'center' }); return; }
       if (!brief.business.trim()) { msg.textContent = 'Please enter your business or project name.'; f.elements.business.focus(); return; }
+      if ((brief.phone || '').replace(/\D/g, '').length < 10) { msg.textContent = 'Please enter a phone number we can reach you at.'; f.elements.phone.focus(); return; }
       if (brief.details.trim().length < 10) { msg.textContent = 'Please tell us a little about the site you want.'; f.elements.details.focus(); return; }
       const label = btn.innerHTML; btn.disabled = true; btn.textContent = 'Loading…';
       try {
