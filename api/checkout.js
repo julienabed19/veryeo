@@ -64,9 +64,20 @@ module.exports = async (req, res) => {
     } else {
       params.customer_creation = 'always';
       params.payment_intent_data = { description: `${site.brand} ${plan.name}: ${brief.business}`, metadata };
+      if (planId === 'demo') {
+        // The $9 website credit code goes ONLY in the demo's post-purchase email (invoice footer), never on the site.
+        const code = process.env.DEMO_CODE || 'DEMO9';
+        params.invoice_creation = {
+          enabled: true,
+          invoice_data: {
+            description: `Veryeo website demo for ${brief.business}`,
+            footer: `Your $9 website credit: when you buy your full Veryeo website, enter code ${code} at checkout and $9 comes off. One use per customer.`,
+            metadata,
+          },
+        };
+      }
     }
-    params.allow_promotion_codes = true; params.allow_promotion_codes = true;
-    params.phone_number_collection = { enabled: true };
+    if (planId === 'website') params.allow_promotion_codes = true;
     const session = await stripe('POST', '/checkout/sessions', params);
     return res.status(200).json({ url: session.url });
   } catch (e) {
