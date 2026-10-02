@@ -66,6 +66,7 @@ module.exports = async (req, res) => {
       params.payment_intent_data = { description: `${site.brand} ${plan.name}: ${brief.business}`, metadata };
     }
     params.allow_promotion_codes = true; params.allow_promotion_codes = true;
+    params.phone_number_collection = { enabled: true };
     const session = await stripe('POST', '/checkout/sessions', params);
     return res.status(200).json({ url: session.url });
   } catch (e) {
