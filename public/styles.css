@@ -248,3 +248,4 @@ h1,h2,h3{letter-spacing:-.03em}
 .promo-q-short::after{content:" \2192";font-weight:800}
 .top .word,.promo{flex:none}
 @media (max-width:480px){.top .word span{display:none}.top .word{font-size:21px}}
+@media (max-width:1060px){.promo-vs{display:none}}
