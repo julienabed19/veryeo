@@ -219,3 +219,31 @@ h1,h2,h3{letter-spacing:-.03em}
   .eyebrow{font-size:11px;padding:6px 11px}
   .tile{padding:18px}
 }
+
+/* ---------- header promo pill: links to Veryeo Video ---------- */
+.top .wrap{justify-content:flex-start;gap:22px}
+.promo{display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 4px 0 16px;border-radius:999px;text-decoration:none;color:#fff;font-size:15px;font-weight:700;white-space:nowrap;
+  background:linear-gradient(95deg,#a855f7 0%,#c026d3 60%,#ec4899 100%);
+  box-shadow:0 0 0 1px rgba(255,255,255,.14) inset,0 8px 28px -6px rgba(217,70,239,.65),0 0 22px -4px rgba(168,85,247,.55);
+  transition:transform .15s,box-shadow .15s}
+.promo:hover{transform:translateY(-1px);box-shadow:0 0 0 1px rgba(255,255,255,.22) inset,0 12px 34px -6px rgba(217,70,239,.8),0 0 30px -4px rgba(168,85,247,.7)}
+.promo-dot{width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 8px rgba(255,255,255,.9);flex:none;animation:promoPulse 2s ease-in-out infinite}
+@keyframes promoPulse{50%{opacity:.45}}
+.promo-q-short{display:none}
+.promo-chip{display:inline-flex;align-items:center;gap:9px;height:32px;padding:0 10px 0 4px;border-radius:999px;background:#fff;color:#6d28d9}
+.promo-tag{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:999px;background:linear-gradient(95deg,#7c3aed,#db2777);color:#fff;font-size:11px;font-weight:800;letter-spacing:.06em}
+.promo-name{font-size:14.5px;font-weight:800;letter-spacing:.01em}
+.promo-chip svg{width:14px;height:14px;flex:none;transition:transform .15s}
+.promo:hover .promo-chip svg{transform:translateX(2px)}
+@media (prefers-reduced-motion:reduce){.promo-dot{animation:none}.promo,.promo-chip svg{transition:none}}
+@media (max-width:900px){.promo-tag{display:none}}
+@media (max-width:700px){
+  .top .wrap{gap:12px;justify-content:space-between}
+  .promo{height:32px;padding:0 12px;gap:7px;font-size:13px}
+  .promo-dot{width:7px;height:7px}
+  .promo-q,.promo-chip{display:none}
+  .promo-q-short{display:inline}
+}
+.promo-q-short::after{content:" \2192";font-weight:800}
+.top .word,.promo{flex:none}
+@media (max-width:480px){.top .word span{display:none}.top .word{font-size:21px}}
