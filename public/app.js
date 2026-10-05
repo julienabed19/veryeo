@@ -9,7 +9,7 @@
     const fmt = (c) => money.format(c / 100).replace(/\.00$/, '');
     $$('[data-price]').forEach((n) => { const p = n.dataset.price === 'care' ? S.care : S.plans[n.dataset.price]; if (p) n.textContent = fmt(p.priceCents); });
     $$('[data-care-points]').forEach((ul) => { ul.innerHTML = ''; (S.care.points || []).forEach((t) => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); }); });
-    if ($('#manageNote') && S.manageLink) { $('#manageNote').innerHTML = ' or <a href="' + S.manageLink + '" target="_blank" rel="noopener">manage your plan here</a>'; }
+    if ($('#manageNote') && S.manageLink) { $('#manageNote').innerHTML = ' or <a href="' + S.manageLink + '" target="_blank" rel="noopener">cancel online here</a>'; }
     $$('[data-email]').forEach((n) => { n.textContent = S.contactEmail; n.href = 'mailto:' + S.contactEmail; });
     $$('[data-year]').forEach((n) => (n.textContent = new Date().getFullYear()));
   }

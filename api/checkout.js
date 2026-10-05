@@ -62,7 +62,7 @@ module.exports = async (req, res) => {
       });
       params.subscription_data = { description: `${site.brand} care plan: ${brief.business}`, metadata };
       // Clear auto-renewal disclosure right above the pay button.
-      params.custom_text.submit = { message: `Care plan: $${(site.care.priceCents / 100).toFixed(0)} is charged today and then every month until you cancel. Cancel anytime by emailing ${site.contactEmail}. By paying you agree to our Terms of service at ${url}/terms.html.` };
+      params.custom_text.submit = { message: `Care plan: $${(site.care.priceCents / 100).toFixed(0)} is charged today and then every month until you cancel. Cancel anytime online at ${site.manageLink || ''} or by emailing ${site.contactEmail}. By paying you agree to our Terms of service at ${url}/terms.html.` };
     } else {
       params.customer_creation = 'always';
       params.payment_intent_data = { description: `${site.brand} ${plan.name}: ${brief.business}`, metadata };
