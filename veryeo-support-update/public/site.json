@@ -1,0 +1,40 @@
+{
+  "_readme": "EDIT THIS FILE to change prices and wording. Prices are in cents (900 = $9.00).",
+  "brand": "Veryeo",
+  "contactEmail": "support.website.issue@gmail.com",
+  "currency": "usd",
+  "plans": {
+    "demo": {
+      "name": "Website demo",
+      "priceCents": 900,
+      "receiptNote": "Thanks for ordering a Veryeo demo! I'll reach out by email as soon as possible with your private homepage preview."
+    },
+    "website": {
+      "name": "Full website",
+      "priceCents": 29900,
+      "receiptNote": "Thanks for ordering your Veryeo website! I'll reach out by email as soon as possible to collect your content and get started."
+    }
+  },
+  "siteTypes": [
+    "Online store",
+    "Barber / salon booking",
+    "Restaurant / cafe",
+    "Fitness / coaching",
+    "Local service business",
+    "Portfolio / personal",
+    "Other"
+  ],
+  "care": {
+    "name": "Hosting & care plan",
+    "priceCents": 3000,
+    "interval": "month",
+    "receiptNote": "Hosting & care for your Veryeo website: custom domain, hosting, up to 30 minutes of small edits a month, and email support (replies within 2 business days). Renews monthly until you cancel.",
+    "points": [
+      "Custom domain included",
+      "Hosting that keeps you online",
+      "Up to 30 minutes of small edits each month",
+      "Email support, replies within 2 business days"
+    ]
+  },
+  "manageLink": "https://billing.stripe.com/p/login/3cIbIT1P5giW8lD4IHcs800"
+}
