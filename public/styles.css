@@ -249,3 +249,5 @@ h1,h2,h3{letter-spacing:-.03em}
 .top .word,.promo{flex:none}
 @media (max-width:480px){.top .word span{display:none}.top .word{font-size:21px}}
 @media (max-width:1060px){.promo-vs{display:none}}
+
+.lead-note{display:block;margin-top:10px;font-size:14px;color:var(--muted)}
