@@ -28,12 +28,12 @@
     "name": "Hosting & care plan",
     "priceCents": 3000,
     "interval": "month",
-    "receiptNote": "Hosting & care for your Veryeo website: custom domain, hosting, small monthly updates and support. Renews monthly until you cancel.",
+    "receiptNote": "Hosting & care for your Veryeo website: custom domain, hosting, up to 30 minutes of small edits a month, and email support (replies within 2 business days). Renews monthly until you cancel.",
     "points": [
       "Custom domain included",
       "Hosting that keeps you online",
-      "Small updates each month",
-      "Ongoing support when you need it"
+      "Up to 30 minutes of small edits each month",
+      "Email support, replies within 2 business days"
     ]
   },
   "manageLink": "https://billing.stripe.com/p/login/3cIbIT1P5giW8lD4IHcs800"
