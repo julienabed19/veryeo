@@ -1,7 +1,7 @@
 {
   "_readme": "EDIT THIS FILE to change prices and wording. Prices are in cents (900 = $9.00).",
   "brand": "Veryeo",
-  "contactEmail": "support.website.issue@gmail.com",
+  "contactEmail": "support@veryeo.com",
   "currency": "usd",
   "plans": {
     "demo": {
