@@ -1,7 +1,10 @@
 // GET /api/order?session_id=cs_...  -> order summary for the confirmation page
 const { stripe } = require('../lib/stripe');
+const { limit } = require('../lib/ratelimit');
 
 module.exports = async (req, res) => {
+  if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
+  if (limit(req, res, 'order', 30, 60 * 1000)) return;
   const id = String((req.query && req.query.session_id) || '');
   if (!/^cs_(test|live)_[A-Za-z0-9]+$/.test(id)) return res.status(400).json({ error: 'Invalid order link.' });
   try {

@@ -2,11 +2,17 @@
 // Prices always come from site.json on the server, never from the browser.
 const site = require('../public/site.json');
 const { stripe, origin } = require('../lib/stripe');
+const { limit } = require('../lib/ratelimit');
+const TERMS_VERSION = '2026-11-13';
 
 const clip = (v, n) => String(v == null ? '' : v).replace(/\s+/g, ' ').trim().slice(0, n);
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  // Same-site requests only (blocks other websites from starting checkouts for visitors).
+  const o = req.headers.origin;
+  if (o && o !== origin(req)) return res.status(403).json({ error: 'Forbidden' });
+  if (limit(req, res, 'checkout', 8, 60 * 1000)) return;
   try {
     const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : req.body || {};
     const planId = body.plan === 'website' ? 'website' : body.plan === 'demo' ? 'demo' : null;
@@ -26,11 +32,13 @@ module.exports = async (req, res) => {
     if (brief.phone.replace(/\D/g, '').length < 10) return res.status(400).json({ error: 'Please enter a phone number we can reach you at.' });
     if (brief.details.length < 10) return res.status(400).json({ error: 'Please tell us a little about the site you want.' });
 
+    if (body.terms !== true) return res.status(400).json({ error: 'Please check the box to agree to the Terms of service and Refund policy.' });
+
     const care = planId === 'website'; // hosting & care is part of every full website
     if (care && body.agree !== true) return res.status(400).json({ error: 'Please check the box to agree to the $30/month hosting & care plan.' });
     const url = origin(req);
     // Saved on the Stripe payment so every order's details show in your dashboard.
-    const metadata = { site: 'veryeo', plan: planId, ...Object.fromEntries(Object.entries(brief).filter(([, v]) => v)) };
+    const metadata = { site: 'veryeo', plan: planId, terms_accepted_at: new Date().toISOString(), terms_version: TERMS_VERSION, ...Object.fromEntries(Object.entries(brief).filter(([, v]) => v)) };
     const buildItem = {
       quantity: 1,
       price_data: {
